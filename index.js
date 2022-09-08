@@ -15,14 +15,12 @@ const folderPathName = "uploads";
 const storage = multer.diskStorage({
 	destination: `./public/${folderPathName}/`,
 	filename: function (req, file, cb) {
-		console.log(
-			sha1(
-				`${Date.now()}+hashing messages with the SHA-1 algorithm+!@marcos!@borges${
-					file.originalname
-				}`
-			)
+		let hash = sha1(
+			`${Date.now()}+hashing messages with the SHA-1 algorithm+!@marcos!@borges${
+				file.originalname
+			}`
 		);
-		cb(null, "arquivo-" + Date.now() + path.extname(file.originalname));
+		cb(null, `arquivo-${hash}${path.extname(file.originalname)}`);
 	},
 });
 
